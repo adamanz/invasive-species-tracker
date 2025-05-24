@@ -1,5 +1,19 @@
 # Phase 4 Complete: Claude AI Integration Summary
 
+## Target Species for AI Detection
+
+Our Claude AI system is trained to detect these key invasive species:
+
+### 🌾 **Cheatgrass** (*Bromus tectorum*)
+![Cheatgrass](outputs/reports/images/cheatgrass_main.jpg)
+- **AI Detection**: Post-fire colonization patterns, spectral drying signatures
+- **Alert Priority**: Critical (fire risk multiplier)
+
+### 💜 **Spotted Knapweed** (*Centaurea stoebe*)
+![Spotted Knapweed](outputs/reports/images/spotted_knapweed_rosette.jpg)
+- **AI Detection**: Allelopathic bare patches, flowering stage signatures
+- **Alert Priority**: High (ecosystem disruption)
+
 ## What We Built
 
 ### 1. **Claude Change Analyzer** (`src/analysis/change_analyzer.py`)

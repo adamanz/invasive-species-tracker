@@ -4,6 +4,18 @@
 
 Using Claude AI to analyze Sentinel-2 satellite imagery from Summer 2023 (peak growing season).
 
+### Target Aquatic Invasive Species
+
+The Sacramento Delta analysis focused on detecting floating and emergent aquatic invasives. For comparison, here are some terrestrial invasives detected in similar ecosystems:
+
+#### 🌾 **Cheatgrass** (*Bromus tectorum*)
+![Cheatgrass](outputs/reports/images/cheatgrass_main.jpg)
+*Common in disturbed areas - shows different spectral pattern from aquatic species*
+
+#### 💜 **Spotted Knapweed** (*Centaurea stoebe*) 
+![Spotted Knapweed](outputs/reports/images/spotted_knapweed_flower.jpg)
+*Terrestrial invasive - contrasts with floating vegetation signatures*
+
 ### Key Findings
 
 1. **Discovery Bay Marina Edge** (37.9089°N, -121.5969°W)

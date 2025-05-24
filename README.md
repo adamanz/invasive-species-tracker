@@ -173,8 +173,29 @@ For large area analysis:
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+## Target Species Detection
+
+This system is designed to detect and monitor key invasive plant species across different ecosystems:
+
+### 🌾 **Cheatgrass** (*Bromus tectorum*)
+
+![Cheatgrass Plant](outputs/reports/images/cheatgrass_main.jpg)
+
+**Key Features:** Annual grass with drooping seed heads, rapidly colonizes post-fire areas
+**Habitat:** Dry slopes, disturbed areas, creating significant fire risk
+
+### 💜 **Spotted Knapweed** (*Centaurea stoebe*)
+
+![Spotted Knapweed](outputs/reports/images/spotted_knapweed_main.jpg)
+
+**Key Features:** Pink-purple flowers with distinctive black-spotted bracts
+**Habitat:** Grasslands, open forests, allelopathic effects on natives
+
+*For complete species identification guide, see [Yellowstone Analysis Report](outputs/reports/yellowstone_invasive_species_detailed.md)*
+
 ## Acknowledgments
 
 - Google Earth Engine for satellite data access
 - Anthropic for Claude AI capabilities
+- California Invasive Plant Council (Cal-IPC) for species identification images
 - The geospatial Python community

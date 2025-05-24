@@ -156,6 +156,26 @@ ANTHROPIC_API_KEY=your-claude-api-key
 GEE_SERVICE_ACCOUNT=your-service-account@project.iam.gserviceaccount.com
 ```
 
+## Target Invasive Species
+
+### Primary Detection Targets
+
+The system is configured to detect these high-priority invasive species using AI-driven spectral analysis:
+
+#### 🌾 **Cheatgrass** (*Bromus tectorum*)
+![Cheatgrass](outputs/reports/images/cheatgrass_main.jpg)
+- **Spectral Signature**: Distinctive post-fire colonization pattern
+- **Detection Window**: May-July (drying phase creates unique signature)
+- **Fire Risk**: Critical - increases wildfire intensity by 300-400%
+
+#### 💜 **Spotted Knapweed** (*Centaurea stoebe*)
+![Spotted Knapweed Flower](outputs/reports/images/spotted_knapweed_flower.jpg)
+- **Spectral Signature**: Allelopathic compounds affect surrounding vegetation
+- **Detection Window**: July-September (flowering stage)
+- **Impact**: Creates bare soil patches, reduces biodiversity
+
+*For complete species identification guide, see outputs/reports/yellowstone_invasive_species_detailed.md*
+
 ## Invasive Species Detection Methodology
 
 ### Temporal Analysis
