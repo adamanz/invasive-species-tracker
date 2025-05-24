@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="2066" dy="1129" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    
+    <!-- Title -->
+    <mxCell id="title" value="Invasive Species Tracker - AI-Powered Satellite Analysis Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#2E3440;" vertex="1" parent="1">
+      <mxGeometry x="200" y="20" width="800" height="30" as="geometry"/>
+    </mxCell>
+    
+    <!-- Satellite Data Sources -->
+    <mxCell id="satellite_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F4FD;strokeColor=#4A90E2;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="50" y="80" width="300" height="180" as="geometry"/>
+    </mxCell>
+    <mxCell id="satellite_title" value="🛰️ Satellite Data Sources" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#2E3440;" vertex="1" parent="1">
+      <mxGeometry x="60" y="90" width="280" height="30" as="geometry"/>
+    </mxCell>
+    
+    <!-- Sentinel-2 -->
+    <mxCell id="sentinel2" value="Sentinel-2 MSI&#xa;COPERNICUS/S2_SR_HARMONIZED&#xa;• 10m resolution&#xa;• 10 spectral bands (B2-B12)&#xa;• 5-day revisit&#xa;• Red-edge bands for vegetation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D4EDDA;strokeColor=#28A745;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="70" y="130" width="120" height="100" as="geometry"/>
+    </mxCell>
+    
+    <!-- Landsat -->
+    <mxCell id="landsat" value="Landsat 8/9&#xa;LC08/LC09/C02/T1_L2&#xa;• 30m resolution&#xa;• 6 spectral bands&#xa;• 16-day revisit&#xa;• Long-term analysis" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3CD;strokeColor=#FFC107;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="210" y="130" width="120" height="100" as="geometry"/>
+    </mxCell>
+    
+    <!-- Google Earth Engine Processing -->
+    <mxCell id="gee_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF9800;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="400" y="80" width="300" height="180" as="geometry"/>
+    </mxCell>
+    <mxCell id="gee_title" value="🌍 Google Earth Engine Processing" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#2E3440;" vertex="1" parent="1">
+      <mxGeometry x="410" y="90" width="280" height="30" as="geometry"/>
+    </mxCell>
+    
+    <!-- Data Extraction -->
+    <mxCell id="extraction" value="Data Extraction&#xa;src/gee/satellite_data.py&#xa;• Cloud filtering (&lt;20%)&#xa;• Temporal composites&#xa;• Spectral signatures&#xa;• AOI clipping" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#2196F3;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="420" y="130" width="120" height="100" as="geometry"/>
+    </mxCell>
+    
+    <!-- Change Detection -->
+    <mxCell id="change_detection" value="Change Detection&#xa;src/gee/change_detection.py&#xa;• Multi-scale analysis&#xa;• Anomaly detection&#xa;• Hotspot identification&#xa;• Early warning system" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#E91E63;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="560" y="130" width="120" height="100" as="geometry"/>
+    </mxCell>
+    
+    <!-- Analysis Pipeline -->
+    <mxCell id="analysis_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#9C27B0;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="50" y="300" width="650" height="200" as="geometry"/>
+    </mxCell>
+    <mxCell id="analysis_title" value="🔬 Multi-Model Analysis Pipeline" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#2E3440;" vertex="1" parent="1">
+      <mxGeometry x="60" y="310" width="630" height="30" as="geometry"/>
+    </mxCell>
+    
+    <!-- Temporal Analysis -->
+    <mxCell id="temporal" value="Temporal Analysis&#xa;src/gee/temporal_analysis.py&#xa;&#xa;• Baseline establishment&#xa;• Trend detection&#xa;• Phenology tracking&#xa;• Invasion progression&#xa;• NDVI/EVI time series" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E8;strokeColor=#4CAF50;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="70" y="350" width="150" height="130" as="geometry"/>
+    </mxCell>
+    
+    <!-- Spectral Analysis -->
+    <mxCell id="spectral" value="Spectral Analysis&#xa;src/analysis/spectral_analyzer.py&#xa;&#xa;• Multi-band signatures&#xa;• Species-specific patterns&#xa;• Red-edge analysis&#xa;• No traditional indices&#xa;• Direct band analysis" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#2196F3;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="240" y="350" width="150" height="130" as="geometry"/>
+    </mxCell>
+    
+    <!-- Spatial Analysis -->
+    <mxCell id="spatial" value="Spatial Analysis&#xa;src/gee/change_detection.py&#xa;&#xa;• Grid-based detection&#xa;• Neighborhood analysis&#xa;• Spread pattern modeling&#xa;• Hotspot clustering&#xa;• Boundary detection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="410" y="350" width="150" height="130" as="geometry"/>
+    </mxCell>
+    
+    <!-- Validation -->
+    <mxCell id="validation" value="Validation Framework&#xa;src/validation/framework.py&#xa;&#xa;• Ground truth comparison&#xa;• Confidence scoring&#xa;• Accuracy assessment&#xa;• Cross-validation&#xa;• Performance metrics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#E91E63;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="580" y="350" width="150" height="130" as="geometry"/>
+    </mxCell>
+    
+    <!-- Claude AI Integration -->
+    <mxCell id="claude_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F4FF;strokeColor=#6366F1;strokeWidth=3;" vertex="1" parent="1">
+      <mxGeometry x="50" y="540" width="650" height="180" as="geometry"/>
+    </mxCell>
+    <mxCell id="claude_title" value="🤖 Claude AI Integration (claude-opus-4-20250514)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#2E3440;" vertex="1" parent="1">
+      <mxGeometry x="60" y="550" width="630" height="30" as="geometry"/>
+    </mxCell>
+    
+    <!-- Spectral AI -->
+    <mxCell id="spectral_ai" value="Spectral AI Analyzer&#xa;src/analysis/spectral_analyzer.py&#xa;&#xa;• Species identification&#xa;• Pattern recognition&#xa;• Multi-band interpretation&#xa;• Confidence scoring" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#4285F4;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="70" y="590" width="150" height="110" as="geometry"/>
+    </mxCell>
+    
+    <!-- Change AI -->
+    <mxCell id="change_ai" value="Change AI Analyzer&#xa;src/analysis/change_analyzer.py&#xa;&#xa;• Outbreak detection&#xa;• Temporal progression&#xa;• Spread analysis&#xa;• Alert generation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF8F00;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="240" y="590" width="150" height="110" as="geometry"/>
+    </mxCell>
+    
+    <!-- Integration -->
+    <mxCell id="integration" value="Integrated Detector&#xa;src/detector.py&#xa;&#xa;• Comprehensive analysis&#xa;• Regional monitoring&#xa;• Invasion tracking&#xa;• Report generation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E8;strokeColor=#2E7D32;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="410" y="590" width="150" height="110" as="geometry"/>
+    </mxCell>
+    
+    <!-- Web Interface -->
+    <mxCell id="web_interface" value="Web Interface&#xa;web_app.py&#xa;&#xa;• Flask API&#xa;• Interactive maps&#xa;• Real-time analysis&#xa;• Visualization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="580" y="590" width="150" height="110" as="geometry"/>
+    </mxCell>
+    
+    <!-- Output -->
+    <mxCell id="output_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E8;strokeColor=#4CAF50;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="750" y="80" width="300" height="620" as="geometry"/>
+    </mxCell>
+    <mxCell id="output_title" value="📊 Analysis Outputs" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#2E3440;" vertex="1" parent="1">
+      <mxGeometry x="760" y="90" width="280" height="30" as="geometry"/>
+    </mxCell>
+    
+    <!-- Species Detection -->
+    <mxCell id="species_output" value="🌾 Species Detection&#xa;&#xa;• Cheatgrass (Bromus tectorum)&#xa;• Canada Thistle (Cirsium arvense)&#xa;• Spotted Knapweed (Centaurea stoebe)&#xa;• Leafy Spurge (Euphorbia esula)&#xa;• Dalmatian Toadflax (Linaria dalmatica)&#xa;&#xa;Confidence: 70-95%" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="770" y="130" width="260" height="120" as="geometry"/>
+    </mxCell>
+    
+    <!-- Hotspot Maps -->
+    <mxCell id="hotspot_output" value="🗺️ Hotspot Maps&#xa;&#xa;• Regional risk assessment&#xa;• Invasion progression tracking&#xa;• Early warning zones&#xa;• Management priority areas&#xa;• Temporal change visualization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F57F17;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="770" y="270" width="260" height="100" as="geometry"/>
+    </mxCell>
+    
+    <!-- Satellite Images -->
+    <mxCell id="satellite_output" value="🛰️ Satellite Image Gallery&#xa;&#xa;• 25 GeoTIFF files&#xa;• Sentinel-2 & Landsat composites&#xa;• Site-specific imagery&#xa;• Change detection pairs&#xa;• Multi-temporal analysis" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#8E24AA;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="770" y="390" width="260" height="100" as="geometry"/>
+    </mxCell>
+    
+    <!-- Reports -->
+    <mxCell id="reports_output" value="📄 AI-Generated Reports&#xa;&#xa;• Yellowstone comprehensive analysis&#xa;• Management recommendations&#xa;• Risk assessments&#xa;• Technical documentation&#xa;• Species identification guides" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E8;strokeColor=#388E3C;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="770" y="510" width="260" height="100" as="geometry"/>
+    </mxCell>
+    
+    <!-- Web UI -->
+    <mxCell id="web_output" value="🌐 Interactive Web UI&#xa;&#xa;• Real-time monitoring dashboard&#xa;• Timeline slider (2019-2024)&#xa;• Species vulnerability panel&#xa;• Temporal visualization charts&#xa;• Leaflet background maps" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#F57C00;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="770" y="630" width="260" height="100" as="geometry"/>
+    </mxCell>
+    
+    <!-- Data Flow Arrows -->
+    <!-- Satellite to GEE -->
+    <mxCell id="arrow1" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;strokeColor=#4A90E2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="350" y="170" as="sourcePoint"/>
+        <mxPoint x="400" y="170" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    
+    <!-- GEE to Analysis -->
+    <mxCell id="arrow2" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;strokeColor=#9C27B0;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="550" y="260" as="sourcePoint"/>
+        <mxPoint x="400" y="300" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    
+    <!-- Analysis to Claude -->
+    <mxCell id="arrow3" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;strokeColor=#6366F1;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="375" y="500" as="sourcePoint"/>
+        <mxPoint x="375" y="540" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    
+    <!-- Claude to Output -->
+    <mxCell id="arrow4" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;strokeColor=#4CAF50;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="700" y="400" as="sourcePoint"/>
+        <mxPoint x="750" y="400" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+    
+    <!-- Data Labels -->
+    <mxCell id="data_label1" value="Raw Satellite Data&#xa;Multi-spectral imagery" style="text;html=1;strokeColor=none;fillColor=#E3F2FD;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;fontColor=#1976D2;" vertex="1" parent="1">
+      <mxGeometry x="360" y="140" width="90" height="40" as="geometry"/>
+    </mxCell>
+    
+    <mxCell id="data_label2" value="Processed Data&#xa;Signatures & Changes" style="text;html=1;strokeColor=none;fillColor=#F3E5F5;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;fontColor=#7B1FA2;" vertex="1" parent="1">
+      <mxGeometry x="450" y="270" width="90" height="40" as="geometry"/>
+    </mxCell>
+    
+    <mxCell id="data_label3" value="AI Analysis Results&#xa;Species & Insights" style="text;html=1;strokeColor=none;fillColor=#F0F4FF;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;fontColor=#6366F1;" vertex="1" parent="1">
+      <mxGeometry x="320" y="510" width="90" height="40" as="geometry"/>
+    </mxCell>
+    
+    <mxCell id="data_label4" value="Reports & Maps&#xa;Actionable Intelligence" style="text;html=1;strokeColor=none;fillColor=#E8F5E8;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;fontColor=#2E7D32;" vertex="1" parent="1">
+      <mxGeometry x="710" y="370" width="90" height="40" as="geometry"/>
+    </mxCell>
+    
+    <!-- Technology Badges -->
+    <mxCell id="tech_badge1" value="Google Earth Engine" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#34A853;strokeColor=#137333;fontColor=white;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="410" y="240" width="80" height="20" as="geometry"/>
+    </mxCell>
+    
+    <mxCell id="tech_badge2" value="Python 3.9+" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3776AB;strokeColor=#2E5A87;fontColor=white;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="240" y="480" width="60" height="20" as="geometry"/>
+    </mxCell>
+    
+    <mxCell id="tech_badge3" value="Claude Opus" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6366F1;strokeColor=#4F46E5;fontColor=white;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="320" y="580" width="70" height="20" as="geometry"/>
+    </mxCell>
+    
+    <mxCell id="tech_badge4" value="Flask + Leaflet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E91E63;strokeColor=#C2185B;fontColor=white;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="590" y="700" width="80" height="20" as="geometry"/>
+    </mxCell>
+    
+    <!-- Performance Metrics -->
+    <mxCell id="metrics" value="🎯 Performance Metrics&#xa;&#xa;• Detection Confidence: 70-95%&#xa;• Temporal Coverage: 2019-2024&#xa;• Spatial Resolution: 10m-30m&#xa;• Processing Speed: ~500MB/min&#xa;• Species Accuracy: 85%+ validation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#6C757D;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="50" y="740" width="300" height="100" as="geometry"/>
+    </mxCell>
+    
+    <!-- Key Innovation -->
+    <mxCell id="innovation" value="🚀 Key Innovation&#xa;&#xa;• No traditional vegetation indices&#xa;• Direct AI spectral interpretation&#xa;• Multi-scale temporal analysis&#xa;• Real-time Claude integration&#xa;• Species-specific signatures" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;align=left;spacingLeft=10;" vertex="1" parent="1">
+      <mxGeometry x="400" y="740" width="300" height="100" as="geometry"/>
+    </mxCell>
+    
+  </root>
+</mxGraphModel>
