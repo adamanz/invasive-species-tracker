@@ -160,7 +160,9 @@ class Sentinel2Extractor(SatelliteDataExtractor):
             # Get the first image
             image = filtered.first()
             
-            if not image:
+            # Check if image exists
+            image_info = image.getInfo()
+            if not image_info:
                 logger.debug(f"No Sentinel-2 imagery found for {point} on {date}")
                 return None
             
@@ -181,20 +183,23 @@ class Sentinel2Extractor(SatelliteDataExtractor):
             # Get metadata
             properties = image.getInfo()['properties']
             
+            # Extract date from system properties
+            timestamp = properties.get('system:time_start', 0)
+            acquisition_date = datetime.fromtimestamp(timestamp / 1000) if timestamp else date
+            
             return SpectralSignature(
                 latitude=point[1],
                 longitude=point[0],
-                acquisition_date=datetime.fromisoformat(
-                    properties['PRODUCT_ID'].split('_')[2][:8]
-                ),
+                acquisition_date=acquisition_date,
                 satellite='Sentinel-2',
                 band_names=self.BAND_NAMES,
                 band_values=band_values,
                 cloud_probability=properties.get('CLOUDY_PIXEL_PERCENTAGE', 0),
                 metadata={
-                    'product_id': properties.get('PRODUCT_ID'),
-                    'spacecraft': properties.get('SPACECRAFT_NAME'),
-                    'processing_baseline': properties.get('PROCESSING_BASELINE')
+                    'product_id': properties.get('PRODUCT_ID', 'N/A'),
+                    'spacecraft': properties.get('SPACECRAFT_NAME', 'Sentinel-2'),
+                    'processing_baseline': properties.get('PROCESSING_BASELINE', 'N/A'),
+                    'system_index': properties.get('system:index', 'N/A')
                 }
             )
             
