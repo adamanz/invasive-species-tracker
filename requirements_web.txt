@@ -1,0 +1,11 @@
+# Web application dependencies
+flask==3.0.0
+flask-cors==4.0.0
+
+# Existing dependencies needed for web app
+earthengine-api
+anthropic
+pandas
+numpy
+python-dotenv
+loguru

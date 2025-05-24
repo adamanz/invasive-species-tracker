@@ -60,12 +60,15 @@
 - Created full test suite with 15+ unit tests
 - Successfully validated system with real Sacramento Delta data
 
-## Phase 5: Visualization & Reporting (Week 6)
-- [ ] Implement geemap-based interactive mapping
-- [ ] Create time series visualization tools
-- [ ] Build PDF report generation with maps and charts
-- [ ] Develop dashboard for monitoring multiple areas
-- [ ] Create export functions for GIS software compatibility
+## Phase 5: Visualization & Web UI (Week 6) - IN PROGRESS
+- [ ] Create web application framework (Flask/FastAPI)
+- [ ] Implement location search functionality
+- [ ] Build timeline slider for temporal analysis
+- [ ] Create species vulnerability assessment panel
+- [ ] Develop temporal trend visualization
+- [ ] Add interactive map component
+- [ ] Implement real-time invasive species detection
+- [ ] Create responsive UI matching the design mockup
 
 ## Phase 6: Testing & Optimization (Week 7)
 - [ ] Write unit tests for all core functions

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipping Point - Invasive Species Tracker</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom styles -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        /* Custom slider styles */
+        .timeline-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(to right, #5B69E3 0%, #E85D75 100%);
+            outline: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        
+        .timeline-slider:hover {
+            opacity: 1;
+        }
+        
+        .timeline-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #5B69E3;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .timeline-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #5B69E3;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Map background */
+        #map {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.3;
+        }
+        
+        /* Content overlay */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+        }
+        
+        /* Logo styles */
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            background-color: #E85D75;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        /* Search input styles */
+        .search-input {
+            background: white;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 12px 20px 12px 45px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 350px;
+            font-size: 16px;
+            color: #2D3748;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #A0AEC0;
+        }
+        
+        /* Panel styles */
+        .info-panel {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 24px;
+        }
+        
+        /* Chart container */
+        .chart-container {
+            position: relative;
+            height: 200px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Map -->
+    <div id="map"></div>
+    
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <div class="container mx-auto px-4 py-8">
+            <!-- Header -->
+            <header class="flex items-center mb-8">
+                <div class="logo-circle">TP</div>
+                <div class="ml-4">
+                    <h1 class="text-2xl font-bold text-gray-800">Tipping Point</h1>
+                    <p class="text-gray-600">Invasive Species Tracker</p>
+                </div>
+            </header>
+            
+            <!-- Main Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Left Column -->
+                <div>
+                    <!-- Search Input -->
+                    <div class="relative mb-6">
+                        <svg class="search-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <input type="text" 
+                               id="locationSearch" 
+                               class="search-input" 
+                               placeholder="Search location"
+                               value="Yellowstone">
+                    </div>
+                    
+                    <!-- Timeline Slider -->
+                    <div class="info-panel mb-6">
+                        <input type="range" 
+                               id="timelineSlider"
+                               class="timeline-slider" 
+                               min="2019" 
+                               max="2024" 
+                               value="2019" 
+                               step="1">
+                        <div class="text-center mt-2 text-gray-600 font-medium">
+                            <span id="yearLabel">2019</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Temporal Visualization -->
+                    <div class="info-panel">
+                        <div class="chart-container">
+                            <canvas id="temporalChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column -->
+                <div>
+                    <!-- Species Vulnerability Assessment -->
+                    <div class="info-panel">
+                        <h2 class="text-xl font-bold text-gray-800 mb-2">Species Vulnerability Assessment</h2>
+                        <p class="text-gray-600 mb-4">Critical Priority Species (Immediate Risk):</p>
+                        
+                        <div id="speciesList" class="space-y-4">
+                            <!-- Species will be loaded here dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize map
+        const map = L.map('map', {
+            zoomControl: false,
+            attributionControl: false,
+            dragging: false,
+            scrollWheelZoom: false,
+            doubleClickZoom: false,
+            boxZoom: false,
+            keyboard: false,
+            tap: false,
+            touchZoom: false
+        }).setView([44.4280, -110.5885], 8);
+        
+        // Add light tile layer
+        L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            opacity: 0.5
+        }).addTo(map);
+        
+        // Chart instance
+        let temporalChart = null;
+        
+        // Timeline slider
+        const slider = document.getElementById('timelineSlider');
+        const yearLabel = document.getElementById('yearLabel');
+        const locationSearch = document.getElementById('locationSearch');
+        const speciesList = document.getElementById('speciesList');
+        
+        // Update year label when slider changes
+        slider.addEventListener('input', (e) => {
+            yearLabel.textContent = e.target.value;
+            updateVisualization();
+        });
+        
+        // Location search functionality
+        locationSearch.addEventListener('change', (e) => {
+            loadLocationData(e.target.value);
+        });
+        
+        // Load species data
+        async function loadLocationData(location) {
+            try {
+                const response = await fetch(`/api/species/${location}`);
+                const data = await response.json();
+                
+                // Update species list
+                updateSpeciesList(data.species);
+                
+                // Update temporal chart
+                updateTemporalChart(data.temporal);
+                
+                // Update map center (simplified for demo)
+                if (location.toLowerCase().includes('yellowstone')) {
+                    map.setView([44.4280, -110.5885], 8);
+                } else if (location.toLowerCase().includes('sacramento')) {
+                    map.setView([37.9089, -121.5969], 10);
+                }
+            } catch (error) {
+                console.error('Error loading location data:', error);
+            }
+        }
+        
+        // Update species list
+        function updateSpeciesList(species) {
+            speciesList.innerHTML = species.map((sp, index) => `
+                <div class="border-l-4 border-gray-200 pl-4">
+                    <h3 class="font-semibold text-gray-800">
+                        ${index + 1}. ${sp.name} 
+                        <span class="font-normal text-gray-600">(${sp.scientific_name})</span>
+                    </h3>
+                    <p class="text-sm text-gray-600 mt-1">
+                        <span class="font-medium">- Threats:</span> ${sp.threats.join(' + ')}
+                    </p>
+                    <p class="text-sm text-gray-600">
+                        <span class="font-medium">- Timeline:</span> ${sp.timeline}
+                    </p>
+                    <p class="text-sm text-gray-600">
+                        <span class="font-medium">- Cascading impacts:</span> ${sp.impacts}
+                    </p>
+                </div>
+            `).join('');
+        }
+        
+        // Update temporal chart
+        function updateTemporalChart(temporalData) {
+            const ctx = document.getElementById('temporalChart').getContext('2d');
+            
+            if (temporalChart) {
+                temporalChart.destroy();
+            }
+            
+            // Prepare datasets
+            const datasets = [];
+            const colors = ['#E85D75', '#5B69E3', '#6B7280', '#10B981'];
+            let colorIndex = 0;
+            
+            for (const [key, values] of Object.entries(temporalData.series)) {
+                datasets.push({
+                    label: key.replace(/_/g, ' '),
+                    data: values,
+                    borderColor: colors[colorIndex % colors.length],
+                    backgroundColor: 'transparent',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    pointHoverRadius: 5
+                });
+                colorIndex++;
+            }
+            
+            temporalChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: temporalData.years,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: false
+                        },
+                        y: {
+                            display: false
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+        }
+        
+        // Update visualization based on year
+        function updateVisualization() {
+            // This would trigger real-time detection in a full implementation
+            const year = slider.value;
+            console.log(`Updating visualization for year ${year}`);
+        }
+        
+        // Initial load
+        loadLocationData('Yellowstone');
+    </script>
+</body>
+</html>
