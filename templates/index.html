@@ -174,8 +174,39 @@
                     
                     <!-- Temporal Visualization -->
                     <div class="info-panel">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Invasion Progression (2019-2024)</h3>
                         <div class="chart-container">
                             <canvas id="temporalChart"></canvas>
+                        </div>
+                        <div class="mt-3 text-xs text-gray-500">
+                            📈 Showing hotspot count increase over time • Click to view detection confidence
+                        </div>
+                    </div>
+                    
+                    <!-- Real-time Detection -->
+                    <div class="info-panel mt-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">🛰️ Real-time Detection</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Click map coordinates</label>
+                                <div class="mt-1 text-sm text-gray-600" id="coordinatesDisplay">
+                                    Click on the map to analyze location
+                                </div>
+                            </div>
+                            <div id="detectionResults" class="hidden">
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium">Analysis Results</span>
+                                        <div id="detectionSpinner" class="hidden">
+                                            <svg class="animate-spin h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div id="detectionContent"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -203,20 +234,125 @@
         const map = L.map('map', {
             zoomControl: false,
             attributionControl: false,
-            dragging: false,
-            scrollWheelZoom: false,
-            doubleClickZoom: false,
+            dragging: true,  // Enable dragging for interaction
+            scrollWheelZoom: true,  // Enable zoom for better navigation
+            doubleClickZoom: true,
             boxZoom: false,
             keyboard: false,
-            tap: false,
-            touchZoom: false
+            tap: true,  // Enable touch
+            touchZoom: true
         }).setView([44.4280, -110.5885], 8);
         
         // Add light tile layer
         L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png', {
             maxZoom: 18,
-            opacity: 0.5
+            opacity: 0.7
         }).addTo(map);
+        
+        // Map click handler for real-time detection
+        let detectionMarker = null;
+        map.on('click', async function(e) {
+            const lat = e.latlng.lat.toFixed(4);
+            const lon = e.latlng.lng.toFixed(4);
+            
+            // Update coordinates display
+            document.getElementById('coordinatesDisplay').textContent = `${lat}°N, ${lon}°W`;
+            
+            // Show detection panel
+            document.getElementById('detectionResults').classList.remove('hidden');
+            document.getElementById('detectionSpinner').classList.remove('hidden');
+            
+            // Remove previous marker
+            if (detectionMarker) {
+                map.removeLayer(detectionMarker);
+            }
+            
+            // Add new marker
+            detectionMarker = L.circleMarker([lat, lon], {
+                color: '#5B69E3',
+                fillColor: '#E85D75',
+                fillOpacity: 0.8,
+                radius: 8,
+                weight: 2
+            }).addTo(map);
+            
+            // Run detection
+            try {
+                const response = await fetch('/api/detect', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        latitude: lat,
+                        longitude: lon,
+                        year: document.getElementById('timelineSlider').value
+                    })
+                });
+                
+                const result = await response.json();
+                displayDetectionResults(result);
+                
+            } catch (error) {
+                console.error('Detection error:', error);
+                document.getElementById('detectionContent').innerHTML = `
+                    <div class="text-red-600 text-sm">
+                        ❌ Detection failed: ${error.message}
+                    </div>
+                `;
+            } finally {
+                document.getElementById('detectionSpinner').classList.add('hidden');
+            }
+        });
+        
+        // Display detection results
+        function displayDetectionResults(result) {
+            const content = document.getElementById('detectionContent');
+            
+            if (result.error) {
+                content.innerHTML = `
+                    <div class="text-red-600 text-sm">
+                        ❌ Error: ${result.error}
+                    </div>
+                `;
+                return;
+            }
+            
+            const statusColor = result.detected ? 'text-red-600' : 'text-green-600';
+            const statusIcon = result.detected ? '⚠️' : '✅';
+            const statusText = result.detected ? 'INVASIVES DETECTED' : 'NO INVASIVES DETECTED';
+            
+            content.innerHTML = `
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium ${statusColor}">
+                            ${statusIcon} ${statusText}
+                        </span>
+                        <span class="text-xs bg-gray-200 rounded-full px-2 py-1">
+                            ${(result.confidence * 100).toFixed(1)}% confidence
+                        </span>
+                    </div>
+                    ${result.species && result.species.length > 0 ? `
+                        <div class="text-sm">
+                            <span class="font-medium">Species:</span> ${result.species.join(', ')}
+                        </div>
+                    ` : ''}
+                    ${result.stage ? `
+                        <div class="text-sm">
+                            <span class="font-medium">Stage:</span> ${result.stage}
+                        </div>
+                    ` : ''}
+                    ${result.recommendations && result.recommendations.length > 0 ? `
+                        <div class="text-sm">
+                            <span class="font-medium">Actions:</span>
+                            <ul class="list-disc list-inside mt-1 text-xs">
+                                ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
         
         // Chart instance
         let temporalChart = null;
@@ -263,23 +399,78 @@
         
         // Update species list
         function updateSpeciesList(species) {
-            speciesList.innerHTML = species.map((sp, index) => `
-                <div class="border-l-4 border-gray-200 pl-4">
-                    <h3 class="font-semibold text-gray-800">
-                        ${index + 1}. ${sp.name} 
-                        <span class="font-normal text-gray-600">(${sp.scientific_name})</span>
-                    </h3>
-                    <p class="text-sm text-gray-600 mt-1">
-                        <span class="font-medium">- Threats:</span> ${sp.threats.join(' + ')}
-                    </p>
-                    <p class="text-sm text-gray-600">
-                        <span class="font-medium">- Timeline:</span> ${sp.timeline}
-                    </p>
-                    <p class="text-sm text-gray-600">
-                        <span class="font-medium">- Cascading impacts:</span> ${sp.impacts}
-                    </p>
+            speciesList.innerHTML = species.map((sp, index) => {
+                const riskColor = getRiskColor(sp.risk_level);
+                const confidenceColor = getConfidenceColor(sp.confidence);
+                
+                return `
+                <div class="border-l-4 ${riskColor.border} pl-4 mb-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-semibold text-gray-800">
+                            ${index + 1}. ${sp.name} 
+                            <span class="font-normal text-gray-600">(${sp.scientific_name})</span>
+                        </h3>
+                        <div class="flex items-center space-x-2">
+                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${riskColor.bg} ${riskColor.text}">
+                                ${sp.risk_level.toUpperCase()}
+                            </span>
+                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${confidenceColor.bg} ${confidenceColor.text}">
+                                ${sp.confidence}% confidence
+                            </span>
+                        </div>
+                    </div>
+                    <div class="space-y-1 text-sm text-gray-600">
+                        <p><span class="font-medium">🎯 Detection:</span> ${sp.detection_sites} sites • ${sp.spread_rate} expansion</p>
+                        <p><span class="font-medium">⚠️ Threats:</span> ${sp.threats.join(' • ')}</p>
+                        <p><span class="font-medium">📈 Status:</span> ${sp.timeline}</p>
+                        <p><span class="font-medium">💥 Impact:</span> ${sp.impacts}</p>
+                    </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
+        }
+        
+        // Get risk level colors
+        function getRiskColor(riskLevel) {
+            switch(riskLevel) {
+                case 'critical':
+                    return {
+                        border: 'border-red-500',
+                        bg: 'bg-red-100',
+                        text: 'text-red-800'
+                    };
+                case 'high':
+                    return {
+                        border: 'border-orange-500',
+                        bg: 'bg-orange-100',
+                        text: 'text-orange-800'
+                    };
+                case 'medium':
+                    return {
+                        border: 'border-yellow-500',
+                        bg: 'bg-yellow-100',
+                        text: 'text-yellow-800'
+                    };
+                default:
+                    return {
+                        border: 'border-gray-300',
+                        bg: 'bg-gray-100',
+                        text: 'text-gray-800'
+                    };
+            }
+        }
+        
+        // Get confidence level colors
+        function getConfidenceColor(confidence) {
+            if (confidence >= 90) {
+                return { bg: 'bg-green-100', text: 'text-green-800' };
+            } else if (confidence >= 80) {
+                return { bg: 'bg-blue-100', text: 'text-blue-800' };
+            } else if (confidence >= 70) {
+                return { bg: 'bg-yellow-100', text: 'text-yellow-800' };
+            } else {
+                return { bg: 'bg-gray-100', text: 'text-gray-800' };
+            }
         }
         
         // Update temporal chart

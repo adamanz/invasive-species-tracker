@@ -19,40 +19,63 @@ CORS(app)
 # Initialize detector
 detector = InvasiveSpeciesDetector(satellite="sentinel2")
 
-# Sample species data for UI
+# Invasive species data for UI
 SPECIES_DATA = {
     "yellowstone": [
         {
-            "name": "Whitebark pine",
-            "scientific_name": "Pinus albicaulis",
-            "threats": ["Temperature stress", "Mountain pine beetle", "Blister rust"],
-            "timeline": "50% mortality by 2050; functional extinction possible by 2100",
-            "impacts": "Clark's nutcracker decline; grizzly bear food loss; watershed function",
-            "risk_level": "critical"
+            "name": "Cheatgrass",
+            "scientific_name": "Bromus tectorum",
+            "threats": ["Post-fire colonization", "Rapid growth", "Fire cycle acceleration"],
+            "timeline": "95.2% confidence in fire-affected areas; 25-30% annual expansion",
+            "impacts": "Fire risk increase 300-400%; native grass displacement; ecosystem conversion",
+            "risk_level": "critical",
+            "confidence": 95.2,
+            "detection_sites": 8,
+            "spread_rate": "25-30% annually"
         },
         {
-            "name": "Yellowstone cutthroat trout",
-            "scientific_name": "Oncorhynchus clarkii bouvieri",
-            "threats": ["Thermal barriers", "Non-native competition", "Disease"],
-            "timeline": "70% habitat loss by 2050",
-            "impacts": "Aquatic food web collapse; terrestrial predator impacts",
-            "risk_level": "critical"
+            "name": "Spotted Knapweed",
+            "scientific_name": "Centaurea stoebe",
+            "threats": ["Allelopathic compounds", "Prolific seed production", "Soil degradation"],
+            "timeline": "Detected at 7 sites with 82.4% avg confidence; widespread distribution",
+            "impacts": "Biodiversity reduction; soil erosion; forage quality loss; bare patch creation",
+            "risk_level": "high",
+            "confidence": 88.7,
+            "detection_sites": 7,
+            "spread_rate": "15-20% annually"
         },
         {
-            "name": "American pika",
-            "scientific_name": "Ochotona princeps",
-            "threats": ["Heat stress", "Habitat compression", "Limited dispersal"],
-            "timeline": "Local extirpations ongoing; accelerating losses post-2030",
-            "impacts": "Alpine ecosystem engineering loss",
-            "risk_level": "critical"
+            "name": "Canada Thistle",
+            "scientific_name": "Cirsium arvense",
+            "threats": ["Rhizome spread", "Dense colonies", "Competitive advantage"],
+            "timeline": "Moderate spread at 5 sites; 78.6% avg confidence; riparian focus",
+            "impacts": "Native vegetation displacement; reduced forage quality; recreation impediment",
+            "risk_level": "medium",
+            "confidence": 84.3,
+            "detection_sites": 5,
+            "spread_rate": "10-15% annually"
         },
         {
-            "name": "Native pollinators",
-            "scientific_name": "Multiple species",
-            "threats": ["Phenological mismatches", "Habitat loss", "Competition"],
-            "timeline": "Network simplification detectable now; collapse risk by 2040",
-            "impacts": "Plant reproduction failure; ecosystem service loss",
-            "risk_level": "critical"
+            "name": "Leafy Spurge",
+            "scientific_name": "Euphorbia esula",
+            "threats": ["Deep root system", "Toxic latex", "Livestock avoidance"],
+            "timeline": "Limited distribution at 2 sites; 71.2% avg confidence; toxicity concerns",
+            "impacts": "Grazing land loss; livestock poisoning; human skin irritation; erosion",
+            "risk_level": "medium",
+            "confidence": 73.4,
+            "detection_sites": 2,
+            "spread_rate": "8-12% annually"
+        },
+        {
+            "name": "Dalmatian Toadflax",
+            "scientific_name": "Linaria dalmatica",
+            "threats": ["Roadside establishment", "Seed dispersal", "Root spread"],
+            "timeline": "Detected at 4 sites; 75.8% avg confidence; entrance corridor focus",
+            "impacts": "Range degradation; native plant competition; aesthetic degradation",
+            "risk_level": "medium",
+            "confidence": 81.2,
+            "detection_sites": 4,
+            "spread_rate": "8-12% annually"
         }
     ],
     "sacramento_delta": [
@@ -83,15 +106,23 @@ SPECIES_DATA = {
     ]
 }
 
-# Temporal data for visualization
+# Temporal invasion progression data
 TEMPORAL_DATA = {
     "yellowstone": {
         "years": [2019, 2020, 2021, 2022, 2023, 2024],
         "series": {
-            "whitebark_pine": [100, 95, 88, 82, 75, 68],
-            "cutthroat_trout": [100, 98, 92, 85, 78, 70],
-            "american_pika": [100, 97, 93, 88, 82, 75],
-            "pollinators": [100, 96, 90, 83, 75, 65]
+            "cheatgrass": [12, 18, 24, 31, 38, 45],  # Hotspot count increase
+            "spotted_knapweed": [15, 18, 21, 25, 28, 32],  # Detection sites
+            "canada_thistle": [8, 10, 12, 15, 18, 22],  # Spread progression
+            "leafy_spurge": [3, 4, 5, 6, 8, 10],  # Limited but growing
+            "dalmatian_toadflax": [5, 7, 9, 12, 15, 18]  # Roadside expansion
+        },
+        "confidence": {
+            "cheatgrass": [75, 78, 82, 87, 92, 95],  # Increasing detection confidence
+            "spotted_knapweed": [70, 73, 76, 80, 85, 88],
+            "canada_thistle": [68, 71, 74, 78, 81, 84],
+            "leafy_spurge": [65, 67, 69, 71, 72, 73],
+            "dalmatian_toadflax": [70, 72, 75, 78, 80, 81]
         }
     },
     "sacramento_delta": {

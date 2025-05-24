@@ -48,3 +48,8 @@ sphinx-rtd-theme==2.0.0
 # Logging and monitoring
 loguru==0.7.2
 sentry-sdk==1.39.2
+
+# Web application framework
+Flask==3.0.0
+Flask-CORS==4.0.0
+gunicorn==21.2.0
