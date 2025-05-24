@@ -22,22 +22,82 @@ This project uses Google Earth Engine (GEE) and Claude AI to detect and track ch
 ## Google Earth Engine Configuration
 
 ### Authentication
-- Use service account authentication for production
-- Store credentials in `.env` file (never commit)
-- Initialize EE with: `ee.Authenticate()` and `ee.Initialize(project='your-project-id')`
+- Use OAuth authentication (not API key or service account)
+- Project must be registered at https://code.earthengine.google.com/register
+- Store project ID in `.env` file (never commit)
+- Initialize with: `ee.Authenticate()` then `ee.Initialize(project='your-project-id')`
+- For headless/production: Use service account after initial OAuth setup
 
 ### Satellite Data Sources
-- **Primary**: Sentinel-2 (10m resolution, 5-day revisit)
-  - Collection: `COPERNICUS/S2_HARMONIZED`
-  - Bands: B2-B8A, B11-B12 for vegetation analysis
-- **Secondary**: Landsat 8/9 for historical comparison
-  - Collection: `LANDSAT/LC08/C02/T1_L2`
 
-### Key Indices for Invasive Species Detection
-- **NDVI**: (NIR - Red) / (NIR + Red) - General vegetation health
-- **EVI**: Enhanced Vegetation Index - Better for dense vegetation
-- **NDWI**: Normalized Difference Water Index - For wetland invasives
-- **Custom Indices**: Species-specific spectral signatures
+#### Best Datasets for Invasive Species Detection:
+
+1. **Sentinel-2 MSI Level-2A** (Primary - High Resolution)
+   - Collection: `COPERNICUS/S2_SR_HARMONIZED`
+   - Resolution: 10m (visible/NIR), 20m (red edge), 60m (atmospheric)
+   - Revisit: 5 days
+   - Best for: Current monitoring, species identification
+   - Key bands: B2-B8A, B11-B12 for vegetation analysis
+   - Advantages: High spatial resolution, frequent revisits, red edge bands
+
+2. **Landsat 8/9 Collection 2** (Historical Analysis)
+   - Collections: `LANDSAT/LC08/C02/T1_L2`, `LANDSAT/LC09/C02/T1_L2`
+   - Resolution: 30m
+   - Revisit: 16 days (8 days combined)
+   - Best for: Long-term trend analysis (2013-present)
+   - Key bands: B2-B7 for vegetation indices
+
+3. **Planet Fusion Monitoring** (Ultra-High Resolution)
+   - Collection: `PLANET/FUSION_SR` (requires Planet API access)
+   - Resolution: 3m daily
+   - Best for: Rapid spread detection, small infestations
+   - Note: Requires additional Planet subscription
+
+4. **MODIS Vegetation Products** (Large Scale Monitoring)
+   - Collection: `MODIS/061/MOD13Q1` (16-day NDVI/EVI)
+   - Resolution: 250m
+   - Best for: Regional spread patterns, phenology tracking
+
+5. **Sentinel-1 SAR** (All-Weather Monitoring)
+   - Collection: `COPERNICUS/S1_GRD`
+   - Resolution: 10m
+   - Best for: Wetland invasives, structural changes
+   - Advantages: Penetrates clouds, detects moisture
+
+### AI-Driven Spectral Analysis (No Traditional Indices)
+
+Instead of using traditional vegetation indices, we leverage Claude's pattern recognition:
+
+1. **Direct Spectral Analysis**
+   - Feed raw band values (B2-B12) to Claude
+   - Let Claude identify species-specific spectral signatures
+   - No information loss from index calculations
+
+2. **Multi-temporal Pattern Recognition**
+   - Provide time series of spectral data
+   - Claude identifies phenological patterns unique to invasives
+   - Detects sudden changes in spectral behavior
+
+3. **Contextual Analysis Features**
+   - Neighboring pixel relationships
+   - Elevation and slope data
+   - Climate and precipitation patterns
+   - Historical land use
+
+4. **Claude Analysis Prompts**
+   ```python
+   # Example prompt structure
+   prompt = f"""
+   Analyze this spectral signature for invasive species:
+   - Location: {lat}, {lon}
+   - Date: {acquisition_date}
+   - Spectral bands (B2-B12): {band_values}
+   - Temporal change: {previous_values} -> {current_values}
+   - Surrounding area: {context_data}
+   
+   Identify any patterns consistent with invasive species spread.
+   """
+   ```
 
 ## Claude Integration
 
