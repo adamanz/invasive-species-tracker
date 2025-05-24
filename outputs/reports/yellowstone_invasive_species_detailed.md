@@ -201,32 +201,118 @@ Analysis of invasive species spread patterns over the past 5 years reveals conce
 
 ## 6. Appendices
 
-### A. Target Species Characteristics
+### A. Target Species Characteristics & Identification Guide
 
-**Cheatgrass** (*Bromus tectorum*)
-- Habitat: dry slopes, disturbed areas
+#### 🌾 **Cheatgrass** (*Bromus tectorum*)
+
+![Cheatgrass Plant](images/cheatgrass_main.jpg)
+*Cheatgrass growth habit showing characteristic drooping seed heads (Photo: Joe DiTomaso, Cal-IPC)*
+
+![Cheatgrass Inflorescence](images/cheatgrass_flower.jpg)
+*Cheatgrass inflorescence with distinctive awns (Photo: Ron Vanderhoff, Cal-IPC)*
+
+**Identification Features:**
+- **Height**: 8-25 inches (20-70 cm)
+- **Leaves**: Soft-hairy, 2-4mm wide, up to 8 inches long
+- **Seed Head**: Long (2-6 inches), slender panicle that droops to one side
+- **Awns**: Sharp, straight awns up to 25mm long
+- **Key Feature**: Turns reddish-brown when dry, creating fire hazard
+
+**Habitat & Impact:**
+- Habitat: dry slopes, disturbed areas, post-fire zones
 - Peak Season: May-July
-- Spread Pattern: Rapidly colonizes after fire
+- Spread Pattern: Rapidly colonizes after fire, outcompetes natives
+- **Fire Risk**: Creates dense, flammable biomass increasing wildfire intensity
 
-**Canada Thistle** (*Cirsium arvense*)
-- Habitat: meadows, roadsides, riparian areas
+---
+
+#### 🌸 **Canada Thistle** (*Cirsium arvense*)
+
+**Identification Features:**
+- **Height**: 1-5 feet tall
+- **Stems**: Smooth, spineless (key distinguishing feature)
+- **Leaves**: Deeply divided with sharp spines, glossy green with white hairs underneath
+- **Flowers**: Small pink/purple clusters (¾ inch), faint vanilla scent
+- **Roots**: Extensive horizontal root system (rhizomes)
+
+**Habitat & Impact:**
+- Habitat: meadows, roadsides, riparian areas, disturbed sites
 - Peak Season: July-September
-- Spread Pattern: Forms dense colonies via rhizomes
+- Spread Pattern: Forms dense colonies via rhizomes, each root section can form new plant
+- **Impact**: Displaces native vegetation, reduces forage quality
 
-**Spotted Knapweed** (*Centaurea stoebe*)
-- Habitat: grasslands, open forests, disturbed sites
+---
+
+#### 💜 **Spotted Knapweed** (*Centaurea stoebe*)
+
+![Spotted Knapweed Plant](images/spotted_knapweed_main.jpg)
+*Spotted Knapweed showing characteristic spotted bracts (Photo: Bob Case, Cal-IPC)*
+
+![Spotted Knapweed Flower](images/spotted_knapweed_flower.jpg)
+*Close-up of spotted knapweed flower head with black-tipped bracts (Photo: Neal Kramer, Cal-IPC)*
+
+![Spotted Knapweed Rosette](images/spotted_knapweed_rosette.jpg)
+*First-year spotted knapweed rosette with deeply lobed leaves (Photo: Zoya Akulova, Cal-IPC)*
+
+**Identification Features:**
+- **Height**: 2-4 feet tall, bushy perennial
+- **Leaves**: First year forms basal rosette with deeply lobed leaves; stem leaves become smaller upward
+- **Flowers**: Pink-purple, thistle-like flowers July-September
+- **Key Feature**: Black-tipped sepals that look like spots (hence "spotted")
+- **Bracts**: Egg-shaped flower buds with overlapping fringed green bracts
+
+**Habitat & Impact:**
+- Habitat: grasslands, open forests, disturbed sites, roadsides
 - Peak Season: July-September
-- Spread Pattern: Prolific seed producer, allelopathic
+- Spread Pattern: Prolific seed producer (up to 25,000 seeds/plant), allelopathic
+- **Impact**: Poisonous to other plants, creates barren monocultures
 
-**Leafy Spurge** (*Euphorbia esula*)
-- Habitat: grasslands, riparian areas
-- Peak Season: May-July
-- Spread Pattern: Deep roots, lateral spread
+---
 
-**Dalmatian Toadflax** (*Linaria dalmatica*)
-- Habitat: roadsides, disturbed areas, rangelands
-- Peak Season: June-September
-- Spread Pattern: Creeping roots and seeds
+#### 🟡 **Leafy Spurge** (*Euphorbia esula*)
+
+**Identification Features:**
+- **Height**: Up to 4 feet tall
+- **Stems**: Smooth, bluish-green, exude white milky sap when broken
+- **Leaves**: Lance-shaped, smooth, up to 10cm long, arranged alternately
+- **Flowers**: Tiny yellowish-green flowers in clusters with heart-shaped yellow bracts
+- **Key Feature**: White milky latex sap (distinguishing characteristic)
+
+**Habitat & Impact:**
+- Habitat: grasslands, riparian areas, prairies
+- Peak Season: May-July (blooming in June)
+- Spread Pattern: Deep taproot system with lateral spreading roots
+- **Toxicity**: Poisonous to cattle and horses, skin irritant to humans
+
+---
+
+#### 🟨 **Dalmatian Toadflax** (*Linaria dalmatica*)
+
+**Identification Features:**
+- **Height**: Up to 4 feet tall
+- **Leaves**: Pale green, waxy, heart-shaped leaves that clasp the stem
+- **Flowers**: Bright yellow snapdragon-type flowers with orange spot, 1-1.5 inches long
+- **Growth**: Multiple stems from single woody base, narrow upright form
+- **Seeds**: Produces up to 500,000 seeds per plant in ½ inch pods
+
+**Habitat & Impact:**
+- Habitat: roadsides, disturbed areas, rangelands, dry sites
+- Peak Season: June-September (long flowering period May-August)
+- Spread Pattern: Creeping roots and prolific seed production
+- **Persistence**: Seeds remain viable up to 10 years in soil
+
+---
+
+#### 🔍 **Species Comparison Quick Reference**
+
+| Feature | Cheatgrass | Canada Thistle | Spotted Knapweed | Leafy Spurge | Dalmatian Toadflax |
+|---------|------------|----------------|------------------|--------------|-------------------|
+| **Flower Color** | Green/tan | Pink/purple | Pink/purple | Yellow-green | Bright yellow |
+| **Stem Spines** | No | No | No | No | No |
+| **Leaf Shape** | Linear, hairy | Lobed, spiny | Deeply lobed | Lance-shaped | Heart-shaped |
+| **Key Feature** | Drooping seed head | Spineless stem | Black-spotted bracts | Milky sap | Waxy leaves |
+| **Height** | 8-25 inches | 1-5 feet | 2-4 feet | Up to 4 feet | Up to 4 feet |
+| **Bloom Time** | May-July | July-September | July-September | May-July | June-September |
 
 ### B. Monitoring Site Coordinates
 
