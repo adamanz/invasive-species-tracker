@@ -79,10 +79,10 @@
             background: rgba(25, 25, 25, 0.98);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            padding: 20px;
+            padding: 16px;
             border-radius: 12px;
             z-index: 1000;
-            min-width: 200px;
+            min-width: 180px;
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
         }
@@ -112,7 +112,44 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .play-button {
+            background: var(--accent-primary);
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0, 212, 170, 0.3);
+        }
+        
+        .play-button:hover {
+            background: var(--accent-secondary);
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 212, 170, 0.4);
+        }
+        
+        .play-button.playing {
+            background: #ff6b35;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+        
+        .play-button.playing:hover {
+            background: #ff5722;
+            box-shadow: 0 6px 16px rgba(255, 107, 53, 0.4);
         }
         
         .time-slider-title {
@@ -172,18 +209,23 @@
         .year-labels {
             display: flex;
             justify-content: space-between;
-            margin-top: 8px;
-            font-size: 0.8rem;
+            margin-top: 12px;
+            font-size: 0.85rem;
             color: var(--text-muted);
         }
         
         .year-label {
             font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
         }
         
         .year-label.active {
             color: var(--accent-primary);
             font-weight: 600;
+            background: rgba(0, 212, 170, 0.1);
+            border: 1px solid rgba(0, 212, 170, 0.3);
         }
         
         .invasion-stats {
@@ -211,9 +253,9 @@
         }
         
         .legend h4 {
-            margin: 0 0 16px 0;
+            margin: 0 0 12px 0;
             color: var(--text-primary);
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             letter-spacing: -0.01em;
         }
@@ -221,8 +263,8 @@
         .legend-item {
             display: flex;
             align-items: center;
-            margin: 12px 0;
-            font-size: 0.9rem;
+            margin: 8px 0;
+            font-size: 0.85rem;
             color: var(--text-secondary);
         }
         
@@ -1048,7 +1090,10 @@
                 <div class="time-slider-container">
                     <div class="time-slider-header">
                         <h4 class="time-slider-title">📅 Temporal Analysis</h4>
-                        <span class="current-year" id="current-year">2019</span>
+                        <div class="header-controls">
+                            <button class="play-button" id="play-button" title="Auto-play timeline">▶️</button>
+                            <span class="current-year" id="current-year">2019</span>
+                        </div>
                     </div>
                     
                     <div class="slider-wrapper">
@@ -1767,6 +1812,11 @@
         const hotspotsCount = document.getElementById('hotspot-count');
         const riskLevel = document.getElementById('risk-level');
         const aiConfidence = document.getElementById('confidence-avg');
+        const playButton = document.getElementById('play-button');
+        
+        // Auto-play variables
+        let isPlaying = false;
+        let playInterval = null;
         
         // Historical data for each year
         const timeData = {
@@ -1803,8 +1853,45 @@
             timeSlider.style.background = `linear-gradient(to right, var(--accent-primary) 0%, var(--accent-primary) ${percentage}%, var(--bg-secondary) ${percentage}%, var(--bg-secondary) 100%)`;
         }
         
-        // Add event listener to slider
+        // Auto-play functionality
+        function togglePlay() {
+            if (isPlaying) {
+                // Stop playing
+                isPlaying = false;
+                clearInterval(playInterval);
+                playButton.textContent = '▶️';
+                playButton.classList.remove('playing');
+                playButton.title = 'Auto-play timeline';
+            } else {
+                // Start playing
+                isPlaying = true;
+                playButton.textContent = '⏸️';
+                playButton.classList.add('playing');
+                playButton.title = 'Pause timeline';
+                
+                playInterval = setInterval(() => {
+                    let currentYear = parseInt(timeSlider.value);
+                    if (currentYear < 2024) {
+                        currentYear++;
+                        timeSlider.value = currentYear;
+                        updateTimeDisplay(currentYear);
+                    } else {
+                        // Restart from 2019
+                        timeSlider.value = 2019;
+                        updateTimeDisplay(2019);
+                    }
+                }, 1500); // Change year every 1.5 seconds
+            }
+        }
+        
+        // Add event listeners
+        playButton.addEventListener('click', togglePlay);
+        
         timeSlider.addEventListener('input', function() {
+            // Stop auto-play if user manually moves slider
+            if (isPlaying) {
+                togglePlay();
+            }
             const selectedYear = parseInt(this.value);
             updateTimeDisplay(selectedYear);
         });
