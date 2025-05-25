@@ -124,32 +124,40 @@
         .play-button {
             background: var(--accent-primary);
             border: none;
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
+            border-radius: 8px;
+            width: 40px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0, 212, 170, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--bg-primary);
+            box-shadow: 0 2px 8px rgba(0, 212, 170, 0.3);
         }
         
         .play-button:hover {
             background: var(--accent-secondary);
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(0, 212, 170, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 212, 170, 0.4);
+        }
+        
+        .play-button:active {
+            transform: translateY(0);
         }
         
         .play-button.playing {
             background: #ff6b35;
-            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
         }
         
         .play-button.playing:hover {
             background: #ff5722;
-            box-shadow: 0 6px 16px rgba(255, 107, 53, 0.4);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+        }
+        
+        .play-icon {
+            transition: all 0.3s ease;
         }
         
         .time-slider-title {
@@ -1091,7 +1099,11 @@
                     <div class="time-slider-header">
                         <h4 class="time-slider-title">📅 Temporal Analysis</h4>
                         <div class="header-controls">
-                            <button class="play-button" id="play-button" title="Auto-play timeline">▶️</button>
+                            <button class="play-button" id="play-button" title="Auto-play timeline">
+                                <svg class="play-icon" viewBox="0 0 24 24" width="16" height="16">
+                                    <path d="M8 5v14l11-7z" fill="currentColor"/>
+                                </svg>
+                            </button>
                             <span class="current-year" id="current-year">2019</span>
                         </div>
                     </div>
@@ -1855,17 +1867,19 @@
         
         // Auto-play functionality
         function togglePlay() {
+            const playIcon = playButton.querySelector('.play-icon path');
+            
             if (isPlaying) {
                 // Stop playing
                 isPlaying = false;
                 clearInterval(playInterval);
-                playButton.textContent = '▶️';
+                playIcon.setAttribute('d', 'M8 5v14l11-7z'); // Play icon
                 playButton.classList.remove('playing');
                 playButton.title = 'Auto-play timeline';
             } else {
                 // Start playing
                 isPlaying = true;
-                playButton.textContent = '⏸️';
+                playIcon.setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z'); // Pause icon
                 playButton.classList.add('playing');
                 playButton.title = 'Pause timeline';
                 
