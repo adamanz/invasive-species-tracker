@@ -74,16 +74,17 @@
         
         .legend {
             position: absolute;
-            bottom: 24px;
-            right: 24px;
-            background: var(--bg-secondary);
-            backdrop-filter: blur(16px);
+            top: 20px;
+            left: 20px;
+            background: rgba(25, 25, 25, 0.98);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             padding: 20px;
-            border-radius: var(--radius-lg);
+            border-radius: 12px;
             z-index: 1000;
-            min-width: 240px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-lg);
+            min-width: 200px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
         }
         
         .time-slider-container {
@@ -1022,6 +1023,26 @@
     <div class="main-container">
         <div class="map-section">
             <div class="map-container">
+                <div class="legend">
+                    <h4>Risk Levels</h4>
+                    <div class="legend-item">
+                        <div class="legend-color risk-high"></div>
+                        <span>High Risk (>85%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color risk-medium"></div>
+                        <span>Medium Risk (70-85%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color risk-low"></div>
+                        <span>Low Risk (<70%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color park-boundary"></div>
+                        <span>Park Boundary</span>
+                    </div>
+                </div>
+                
                 <div id="map"></div>
                 
                 <div class="time-slider-container">
@@ -1057,26 +1078,6 @@
                             <div class="stat-value" id="confidence-avg">78.5%</div>
                             <div class="stat-label">AI Confidence</div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="legend">
-                    <h4>Risk Levels</h4>
-                    <div class="legend-item">
-                        <div class="legend-color risk-high"></div>
-                        <span>High Risk (>85%)</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color risk-medium"></div>
-                        <span>Medium Risk (70-85%)</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color risk-low"></div>
-                        <span>Low Risk (<70%)</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color park-boundary"></div>
-                        <span>Park Boundary</span>
                     </div>
                 </div>
             </div>
