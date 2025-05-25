@@ -2,7 +2,7 @@
 
 An AI-powered system for detecting and monitoring invasive plant species using Google Earth Engine satellite imagery and Claude AI analysis.
 
-🌐 **[View Yellowstone National Park Analysis Report](https://adamanz.github.io/invasive-species-tracker/yellowstone_invasive_species_detailed)**
+🌐 **[View Yellowstone National Park Analysis Report](https://adamanz.github.io/invasive-species-tracker/)**
 
 ## 🚨 Yellowstone Report Key Findings (2019-2024)
 

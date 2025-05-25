@@ -8,6 +8,9 @@
 
 ---
 
+![Yellowstone Overview Map](images/yellowstone_overview_map.jpg)
+*Overview map showing all 10 monitoring sites across Yellowstone National Park with invasion risk levels*
+
 ## Executive Summary
 
 🔬 **Novel AI-Satellite Integration**: This groundbreaking analysis combines Google Earth Engine satellite imagery with Claude AI's pattern recognition to reveal previously undetectable invasive species spread patterns across Yellowstone National Park.
@@ -34,6 +37,9 @@
 ---
 
 ## 1. Temporal Progression Analysis (2019-2024)
+
+![Temporal Progression Chart](images/temporal_progression_chart.jpg)
+*Chart showing exponential increase in invasive species hotspots from 2019-2024*
 
 ### 📈 **Novel Discovery: Exponential Invasion Acceleration**
 
@@ -74,6 +80,9 @@
 - **High Risk Sites**: Fire-affected Areas (95.2%), Lamar Valley (89.7%), Hayden Valley (86.3%)
 
 ## 2. Species Distribution Analysis
+
+![Species Distribution Map](images/species_distribution_map.jpg)
+*Map showing current distribution of all five invasive species across Yellowstone*
 
 ### 🧬 **Novel Discovery: AI-Identified Species Signatures**
 
@@ -127,6 +136,9 @@
 
 ## 3. Invasion Hotspot Analysis
 
+![Invasion Spread Pattern](images/invasion_spread_pattern.jpg)
+*Visualization of invasion corridors and spread patterns across the park*
+
 ### Critical Areas Requiring Immediate Attention
 
 #### North Entrance Corridor
@@ -175,6 +187,9 @@
 - **Risk Factors**: Vehicle traffic, seed dispersal along road
 
 ## 4. Management Recommendations
+
+![Management Priority Map](images/management_priority_map.jpg)
+*Color-coded map showing management priority zones based on invasion severity*
 
 ### Priority Actions
 
@@ -225,6 +240,9 @@
 **Public education**
 - Details: Inform visitors about invasive species prevention
 - Timeline: Ongoing
+
+![Fire Invasion Correlation](images/fire_invasion_correlation.jpg)
+*Graph showing direct correlation between fire severity and invasion probability*
 
 ## 5. Breakthrough Methodology & Novel Discoveries
 
@@ -389,18 +407,18 @@
 
 ### B. Monitoring Site Coordinates
 
-| Site Name | Latitude | Longitude |
+| Site Name | Latitude | Longitude | Thumbnail |
 |-----------|----------|-----------|
-| Old Faithful Area | 44.4600 | -110.8280 |
-| Norris Geyser Basin | 44.7260 | -110.7030 |
-| Hayden Valley | 44.6600 | -110.4680 |
-| Lamar Valley | 44.8980 | -110.2240 |
-| South Entrance | 44.1380 | -110.6660 |
-| West Thumb | 44.4160 | -110.5730 |
-| Tower Junction | 44.9160 | -110.4100 |
-| Madison Junction | 44.6460 | -110.8600 |
-| Fishing Bridge | 44.5650 | -110.3730 |
-| Grant Village | 44.3930 | -110.5580 |
+| Old Faithful Area | 44.4600 | -110.8280 | ![Site](images/old_faithful_site.jpg) |
+| Norris Geyser Basin | 44.7260 | -110.7030 | ![Site](images/norris_geyser_site.jpg) |
+| Hayden Valley | 44.6600 | -110.4680 | ![Site](images/lamar_valley.jpg) |
+| Lamar Valley | 44.8980 | -110.2240 | ![Site](images/lamar_valley.jpg) |
+| South Entrance | 44.1380 | -110.6660 | ![Site](images/south_entrance_site.jpg) |
+| West Thumb | 44.4160 | -110.5730 | ![Site](images/west_thumb_site.jpg) |
+| Tower Junction | 44.9160 | -110.4100 | ![Site](images/tower_junction_site.jpg) |
+| Madison Junction | 44.6460 | -110.8600 | ![Site](images/madison_junction_site.jpg) |
+| Fishing Bridge | 44.5650 | -110.3730 | ![Site](images/fishing_bridge_site.jpg) |
+| Grant Village | 44.3930 | -110.5580 | ![Site](images/grant_village_site.jpg) |
 
 ### C. Key Novel Discoveries Summary
 
