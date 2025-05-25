@@ -369,16 +369,16 @@
         }
         
         .report-container h1 {
-            color: var(--text-primary);
-            text-align: left;
+            color: var(--text-primary) !important;
+            text-align: center !important;
             margin-bottom: 24px;
             font-size: 1.875rem;
             font-weight: 700;
             letter-spacing: -0.025em;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background: none !important;
+            background-clip: initial !important;
+            -webkit-background-clip: initial !important;
+            -webkit-text-fill-color: initial !important;
         }
         
         .report-container h2 {
@@ -1067,7 +1067,7 @@
         <!-- Report Section -->
     <div class="report-section">
         <div class="report-container">
-            <h1 style="text-align: center; line-height: 1.2; margin-bottom: 24px;">📊 Yellowstone Invasive Species Analysis</h1>
+            <h1 style="text-align: center; line-height: 1.2; margin-bottom: 24px; background: none; color: var(--text-primary);">📊 Yellowstone Invasive Species Analysis</h1>
             
             <div class="report-meta" style="text-align: center; margin-bottom: 32px; padding: 16px; background: var(--bg-secondary); border-radius: 8px;">
                 <span><strong>Generated:</strong> 2025-05-24 18:15:00</span> •
@@ -1266,17 +1266,17 @@
             
             <div class="satellite-gallery">
                 <div class="satellite-image">
-                    <img src="outputs/satellite_images/monitoring_sites/yellowstone_site_lamar_valley_2024.png" alt="Lamar Valley Cheatgrass">
+                    <img src="https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Satellite+Image+Loading..." alt="Lamar Valley Cheatgrass">
                     <p><em>Lamar Valley - High cheatgrass invasion risk (89.5% confidence) visible as lighter vegetation patches</em></p>
                 </div>
                 
                 <div class="satellite-image">
-                    <img src="outputs/satellite_images/monitoring_sites/yellowstone_site_hayden_valley_2024.png" alt="Hayden Valley Spurge">
+                    <img src="https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Satellite+Image+Loading..." alt="Hayden Valley Spurge">
                     <p><em>Hayden Valley - Leafy spurge detection (73.4% confidence) in riparian zones</em></p>
                 </div>
                 
                 <div class="satellite-image">
-                    <img src="outputs/satellite_images/monitoring_sites/yellowstone_site_south_entrance_2024.png" alt="South Entrance Knapweed">
+                    <img src="https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Satellite+Image+Loading..." alt="South Entrance Knapweed">
                     <p><em>South Entrance - Spotted knapweed infestation (88.7% confidence) along roadway corridor</em></p>
                 </div>
             </div>
@@ -1418,7 +1418,84 @@
             fillOpacity: 0.1
         }).addTo(map).bindPopup("<b>Yellowstone National Park</b><br>Invasive Species Monitoring Area");
         
-        // Monitoring sites data with species detections
+        // Historical monitoring sites data by year
+        const monitoringSitesByYear = {
+            2019: [
+                {name: "North Entrance Corridor", lat: 45.0, lng: -110.6, riskLevel: "medium", count: 3},
+                {name: "West Entrance Road", lat: 44.65, lng: -110.9, riskLevel: "medium", count: 2},
+                {name: "Madison Junction", lat: 44.6460, lng: -110.8600, riskLevel: "low", count: 2},
+                {name: "Old Faithful Area", lat: 44.4600, lng: -110.8280, riskLevel: "low", count: 1},
+                {name: "Lamar Valley", lat: 44.8980, lng: -110.2240, riskLevel: "medium", count: 2},
+                {name: "Hayden Valley", lat: 44.6600, lng: -110.4680, riskLevel: "low", count: 1},
+                {name: "South Entrance", lat: 44.1380, lng: -110.6660, riskLevel: "low", count: 1}
+            ],
+            2020: [
+                {name: "North Entrance Corridor", lat: 45.0, lng: -110.6, riskLevel: "medium", count: 4},
+                {name: "West Entrance Road", lat: 44.65, lng: -110.9, riskLevel: "medium", count: 3},
+                {name: "Madison Junction", lat: 44.6460, lng: -110.8600, riskLevel: "medium", count: 2},
+                {name: "Old Faithful Area", lat: 44.4600, lng: -110.8280, riskLevel: "medium", count: 2},
+                {name: "Lamar Valley", lat: 44.8980, lng: -110.2240, riskLevel: "medium", count: 2},
+                {name: "Hayden Valley", lat: 44.6600, lng: -110.4680, riskLevel: "low", count: 1},
+                {name: "South Entrance", lat: 44.1380, lng: -110.6660, riskLevel: "medium", count: 2},
+                {name: "Fire-affected Areas", lat: 44.85, lng: -110.4, riskLevel: "medium", count: 2}
+            ],
+            2021: [
+                {name: "North Entrance Corridor", lat: 45.0, lng: -110.6, riskLevel: "high", count: 5},
+                {name: "West Entrance Road", lat: 44.65, lng: -110.9, riskLevel: "medium", count: 3},
+                {name: "Madison Junction", lat: 44.6460, lng: -110.8600, riskLevel: "medium", count: 3},
+                {name: "Old Faithful Area", lat: 44.4600, lng: -110.8280, riskLevel: "medium", count: 2},
+                {name: "Lamar Valley", lat: 44.8980, lng: -110.2240, riskLevel: "high", count: 4},
+                {name: "Hayden Valley", lat: 44.6600, lng: -110.4680, riskLevel: "medium", count: 2},
+                {name: "South Entrance", lat: 44.1380, lng: -110.6660, riskLevel: "medium", count: 2},
+                {name: "Fire-affected Areas", lat: 44.85, lng: -110.4, riskLevel: "high", count: 4},
+                {name: "Tower Junction", lat: 44.9160, lng: -110.4100, riskLevel: "medium", count: 2},
+                {name: "Grant Village", lat: 44.3930, lng: -110.5580, riskLevel: "medium", count: 1}
+            ],
+            2022: [
+                {name: "North Entrance Corridor", lat: 45.0, lng: -110.6, riskLevel: "high", count: 6},
+                {name: "West Entrance Road", lat: 44.65, lng: -110.9, riskLevel: "high", count: 4},
+                {name: "Madison Junction", lat: 44.6460, lng: -110.8600, riskLevel: "high", count: 4},
+                {name: "Old Faithful Area", lat: 44.4600, lng: -110.8280, riskLevel: "medium", count: 3},
+                {name: "Lamar Valley", lat: 44.8980, lng: -110.2240, riskLevel: "high", count: 5},
+                {name: "Hayden Valley", lat: 44.6600, lng: -110.4680, riskLevel: "high", count: 3},
+                {name: "South Entrance", lat: 44.1380, lng: -110.6660, riskLevel: "high", count: 3},
+                {name: "Fire-affected Areas", lat: 44.85, lng: -110.4, riskLevel: "high", count: 6},
+                {name: "Tower Junction", lat: 44.9160, lng: -110.4100, riskLevel: "medium", count: 3},
+                {name: "Grant Village", lat: 44.3930, lng: -110.5580, riskLevel: "medium", count: 2},
+                {name: "Fishing Bridge", lat: 44.5650, lng: -110.3730, riskLevel: "low", count: 1}
+            ],
+            2023: [
+                {name: "North Entrance Corridor", lat: 45.0, lng: -110.6, riskLevel: "high", count: 7},
+                {name: "West Entrance Road", lat: 44.65, lng: -110.9, riskLevel: "high", count: 5},
+                {name: "Madison Junction", lat: 44.6460, lng: -110.8600, riskLevel: "high", count: 5},
+                {name: "Old Faithful Area", lat: 44.4600, lng: -110.8280, riskLevel: "high", count: 4},
+                {name: "Lamar Valley", lat: 44.8980, lng: -110.2240, riskLevel: "high", count: 6},
+                {name: "Hayden Valley", lat: 44.6600, lng: -110.4680, riskLevel: "high", count: 4},
+                {name: "South Entrance", lat: 44.1380, lng: -110.6660, riskLevel: "high", count: 4},
+                {name: "Fire-affected Areas", lat: 44.85, lng: -110.4, riskLevel: "high", count: 7},
+                {name: "Tower Junction", lat: 44.9160, lng: -110.4100, riskLevel: "high", count: 4},
+                {name: "Grant Village", lat: 44.3930, lng: -110.5580, riskLevel: "high", count: 3},
+                {name: "Fishing Bridge", lat: 44.5650, lng: -110.3730, riskLevel: "medium", count: 2},
+                {name: "West Thumb", lat: 44.4160, lng: -110.5730, riskLevel: "medium", count: 2}
+            ],
+            2024: [
+                {name: "North Entrance Corridor", lat: 45.0, lng: -110.6, riskLevel: "high", count: 8},
+                {name: "West Entrance Road", lat: 44.65, lng: -110.9, riskLevel: "high", count: 6},
+                {name: "Madison Junction", lat: 44.6460, lng: -110.8600, riskLevel: "high", count: 6},
+                {name: "Old Faithful Area", lat: 44.4600, lng: -110.8280, riskLevel: "high", count: 5},
+                {name: "Lamar Valley", lat: 44.8980, lng: -110.2240, riskLevel: "high", count: 7},
+                {name: "Hayden Valley", lat: 44.6600, lng: -110.4680, riskLevel: "high", count: 5},
+                {name: "South Entrance", lat: 44.1380, lng: -110.6660, riskLevel: "high", count: 5},
+                {name: "Fire-affected Areas", lat: 44.85, lng: -110.4, riskLevel: "high", count: 8},
+                {name: "Tower Junction", lat: 44.9160, lng: -110.4100, riskLevel: "high", count: 5},
+                {name: "Grant Village", lat: 44.3930, lng: -110.5580, riskLevel: "high", count: 4},
+                {name: "Fishing Bridge", lat: 44.5650, lng: -110.3730, riskLevel: "high", count: 3},
+                {name: "West Thumb", lat: 44.4160, lng: -110.5730, riskLevel: "high", count: 3},
+                {name: "Norris Geyser", lat: 44.7260, lng: -110.7030, riskLevel: "medium", count: 2}
+            ]
+        };
+        
+        // Current monitoring sites for popups
         const monitoringSites = [
             {
                 name: "Old Faithful Area",
@@ -1429,7 +1506,7 @@
                     {name: "Cheatgrass", confidence: 78.3, risk: "high"},
                     {name: "Spotted Knapweed", confidence: 72.1, risk: "medium"}
                 ],
-                image: "outputs/satellite_images/monitoring_sites/yellowstone_site_lamar_valley_2024.png",
+                image: "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Satellite+Image+Loading...",
                 description: "Thermal area with moderate invasive species pressure along visitor corridors."
             },
             {
@@ -1440,7 +1517,7 @@
                 species: [
                     {name: "Mixed Invasives", confidence: 75.8, risk: "medium"}
                 ],
-                image: "outputs/satellite_images/monitoring_sites/yellowstone_site_hayden_valley_2024.png",
+                image: "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Satellite+Image+Loading...",
                 description: "Thermal basin with diverse invasive species establishment."
             },
             {
@@ -1452,7 +1529,7 @@
                     {name: "Leafy Spurge", confidence: 73.4, risk: "medium"},
                     {name: "Canada Thistle", confidence: 69.2, risk: "medium"}
                 ],
-                image: "outputs/satellite_images/monitoring_sites/yellowstone_site_hayden_valley_2024.png",
+                image: "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Satellite+Image+Loading...",
                 description: "Critical riparian habitat with significant invasive species threat to wildlife."
             },
             {
@@ -1465,7 +1542,7 @@
                     {name: "Leafy Spurge", confidence: 68.9, risk: "medium"},
                     {name: "Canada Thistle", confidence: 71.3, risk: "medium"}
                 ],
-                image: "outputs/satellite_images/monitoring_sites/yellowstone_site_lamar_valley_2024.png",
+                image: "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Satellite+Image+Loading...",
                 description: "America's Serengeti - highest invasion risk due to wildlife congregation and fire disturbance."
             },
             {
@@ -1477,7 +1554,7 @@
                     {name: "Spotted Knapweed", confidence: 88.7, risk: "high"},
                     {name: "Cheatgrass", confidence: 82.1, risk: "high"}
                 ],
-                image: "outputs/satellite_images/monitoring_sites/yellowstone_site_south_entrance_2024.png",
+                image: "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Satellite+Image+Loading...",
                 description: "Major park entrance with severe roadway corridor invasion from vehicle traffic."
             },
             {
@@ -1489,7 +1566,7 @@
                     {name: "Canada Thistle", confidence: 81.2, risk: "high"},
                     {name: "Spotted Knapweed", confidence: 74.6, risk: "medium"}
                 ],
-                image: "outputs/satellite_images/monitoring_sites/yellowstone_site_south_entrance_2024.png",
+                image: "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Satellite+Image+Loading...",
                 description: "Lakeside thermal area with moderate invasive species establishment."
             },
             {
@@ -1501,7 +1578,7 @@
                     {name: "Spotted Knapweed", confidence: 82.1, risk: "high"},
                     {name: "Dalmatian Toadflax", confidence: 76.4, risk: "medium"}
                 ],
-                image: "outputs/satellite_images/monitoring_sites/yellowstone_site_lamar_valley_2024.png",
+                image: "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Satellite+Image+Loading...",
                 description: "Junction area with high invasion risk from multiple species."
             },
             {
@@ -1513,7 +1590,7 @@
                     {name: "Canada Thistle", confidence: 84.3, risk: "high"},
                     {name: "Dalmatian Toadflax", confidence: 77.8, risk: "medium"}
                 ],
-                image: "outputs/satellite_images/monitoring_sites/yellowstone_site_hayden_valley_2024.png",
+                image: "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Satellite+Image+Loading...",
                 description: "Major junction with established invasive species populations."
             },
             {
@@ -1525,7 +1602,7 @@
                     {name: "Canada Thistle", confidence: 78.9, risk: "medium"},
                     {name: "Spotted Knapweed", confidence: 71.2, risk: "medium"}
                 ],
-                image: "outputs/satellite_images/monitoring_sites/yellowstone_site_south_entrance_2024.png",
+                image: "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Satellite+Image+Loading...",
                 description: "Lakeside area with moderate invasion pressure."
             },
             {
@@ -1537,7 +1614,7 @@
                     {name: "Spotted Knapweed", confidence: 85.3, risk: "high"},
                     {name: "Canada Thistle", confidence: 79.1, risk: "medium"}
                 ],
-                image: "outputs/satellite_images/monitoring_sites/yellowstone_site_lamar_valley_2024.png",
+                image: "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Satellite+Image+Loading...",
                 description: "Developed area with significant invasive species establishment."
             }
         ];
@@ -1587,37 +1664,72 @@
             `;
         }
         
-        // Add monitoring site markers
-        monitoringSites.forEach(site => {
-            const marker = L.circleMarker([site.lat, site.lng], {
-                radius: 12,
-                fillColor: getRiskColor(site.riskLevel),
-                color: '#fff',
-                weight: 2,
-                opacity: 1,
-                fillOpacity: 0.8
-            }).addTo(map);
-            
-            marker.bindPopup(createPopupContent(site), {
-                maxWidth: 450,
-                className: 'custom-popup'
+        // Store map markers for dynamic updates
+        let currentMarkers = [];
+        
+        // Function to clear existing markers
+        function clearMarkers() {
+            currentMarkers.forEach(marker => {
+                map.removeLayer(marker);
             });
+            currentMarkers = [];
+        }
+        
+        // Function to add markers for a specific year
+        function addMarkersForYear(year) {
+            clearMarkers();
+            const sites = monitoringSitesByYear[year] || [];
             
-            // Add hover effect
-            marker.on('mouseover', function() {
-                this.setStyle({
-                    radius: 15,
-                    weight: 3
+            sites.forEach(site => {
+                const marker = L.circleMarker([site.lat, site.lng], {
+                    radius: Math.max(8, site.count * 2),
+                    fillColor: getRiskColor(site.riskLevel),
+                    color: '#fff',
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 0.8
+                }).addTo(map);
+                
+                marker.bindPopup(`
+                    <div class="popup-content">
+                        <h3>🎯 ${site.name}</h3>
+                        <p><strong>Year:</strong> ${year}</p>
+                        <p><strong>Risk Level:</strong> ${site.riskLevel.toUpperCase()}</p>
+                        <p><strong>Invasive Species Count:</strong> ${site.count}</p>
+                        <p><strong>Status:</strong> ${getStatusMessage(site.riskLevel, year)}</p>
+                        <small><em>📊 AI Analysis Results</em></small>
+                    </div>
+                `, {
+                    maxWidth: 350,
+                    className: 'custom-popup'
                 });
-            });
-            
-            marker.on('mouseout', function() {
-                this.setStyle({
-                    radius: 12,
-                    weight: 2
+                
+                // Add hover effect
+                marker.on('mouseover', function() {
+                    this.setStyle({
+                        radius: Math.max(12, site.count * 2.5),
+                        weight: 3
+                    });
                 });
+                
+                marker.on('mouseout', function() {
+                    this.setStyle({
+                        radius: Math.max(8, site.count * 2),
+                        weight: 2
+                    });
+                });
+                
+                currentMarkers.push(marker);
             });
-        });
+        }
+        
+        // Function to get status message based on risk and year
+        function getStatusMessage(riskLevel, year) {
+            if (year <= 2019) return "Early detection phase";
+            if (year <= 2021) return "Establishing populations";
+            if (year <= 2023) return "Rapid expansion detected";
+            return "Critical management required";
+        }
         
         // Add fire-affected areas (high-risk zones)
         const fireAffectedAreas = [
@@ -1707,6 +1819,9 @@
                     label.classList.add('active');
                 }
             });
+            
+            // Update map markers for the selected year
+            addMarkersForYear(year);
             
             // Update slider track color
             const percentage = ((year - 2019) / (2024 - 2019)) * 100;
