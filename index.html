@@ -1890,9 +1890,8 @@
                         timeSlider.value = currentYear;
                         updateTimeDisplay(currentYear);
                     } else {
-                        // Restart from 2019
-                        timeSlider.value = 2019;
-                        updateTimeDisplay(2019);
+                        // Stop at the end
+                        togglePlay();
                     }
                 }, 1500); // Change year every 1.5 seconds
             }
